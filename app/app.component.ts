@@ -71,19 +71,33 @@ const DAPPS: Dapp[] = [
   `],
   template: `
     <h1>{{title}}</h1>
-    <h2>{{dapp.name}} details</h2>
-    <div><label>id: </label>{{dapp.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="dapp.name" placeholder="name">
+
+    <div *ngIf="selectedDapp">
+      <h2>{{selectedDapp.name}} details</h2>
+      <div><label>id: </label>{{selectedDapp.id}}</div>
+      <div>
+        <label>name: </label>
+        <input [(ngModel)]="selectedDapp.name" placeholder="name">
+      </div>
     </div>
+
+    <h2>Dapps</h2>
+    <ul class="heroes">
+      <li *ngFor="let dapp of dapps"
+        [class.selected]="dapp === selectedDapp"
+        (click)="onSelect(dapp)">
+        <span class="badge">{{dapp.id}}</span> {{dapp.name}}
+      </li>
+    </ul>
   `
 })
 
 export class AppComponent {
   title = 'Dapps';
-  dapp: Dapp = {
-      id: 1,
-      name: 'Dapp 1'
+  dapps = DAPPS;
+  selectedDapp: Dapp;
+
+  onSelect(dapp: Dapp): void {
+    this.selectedDapp = dapp;
   }
 }
