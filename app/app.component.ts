@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-export class Dapp {
-  id: number;
-  name: string;
-}
+import { Dapp } from './dapp';
 
 const DAPPS: Dapp[] = [
   { id: 11, name: 'Dapp Mr. Nice' },
@@ -71,17 +67,7 @@ const DAPPS: Dapp[] = [
   `],
   template: `
     <h1>{{title}}</h1>
-
-    <div *ngIf="selectedDapp">
-      <h2>{{selectedDapp.name}} details</h2>
-      <div><label>id: </label>{{selectedDapp.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedDapp.name" placeholder="name">
-      </div>
-    </div>
-
-    <h2>Dapps</h2>
+    <h2>My Dapps</h2>
     <ul class="heroes">
       <li *ngFor="let dapp of dapps"
         [class.selected]="dapp === selectedDapp"
@@ -89,6 +75,7 @@ const DAPPS: Dapp[] = [
         <span class="badge">{{dapp.id}}</span> {{dapp.name}}
       </li>
     </ul>
+    <my-dapp-detail [dapp]="selectedDapp"></my-dapp-detail>
   `
 })
 
