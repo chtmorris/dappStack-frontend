@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
-import { Dapp } from './dapp';
+import { Component, OnInit } from '@angular/core';
 
-const DAPPS: Dapp[] = [
-  { id: 11, name: 'Dapp Mr. Nice' },
-  { id: 12, name: 'Dapp Narco' },
-  { id: 13, name: 'Dapp Bombasto' },
-  { id: 14, name: 'Dapp Celeritas' },
-  { id: 15, name: 'Dapp Magneta' },
-  { id: 16, name: 'Dapp RubberMan' },
-  { id: 17, name: 'Dapp Dynama' },
-  { id: 18, name: 'Dapp Dr IQ' },
-  { id: 19, name: 'Dapp Magma' },
-  { id: 20, name: 'Dapp Tornado' }
-];
+import { Dapp } from './dapp';
+import { DappService } from './dapp.service';
 
 @Component({
   selector: 'my-app',
+  template: `
+    <h1>{{title}}</h1>
+    <h2>My Dapps</h2>
+    <ul class="heroes">
+      <li *ngFor="let dapp of dapps"
+        [class.selected]="dapp === selectedDapp"
+        (click)="onSelect(dapp)">
+        <span class="badge">{{dapp.id}}</span> {{dapp.name}}
+      </li>
+    </ul>
+    <my-dapp-detail [dapp]="selectedDapp"></my-dapp-detail>
+  `,
   styles: [`
     .selected {
       background-color: #CFD8DC !important;
@@ -64,27 +65,26 @@ const DAPPS: Dapp[] = [
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `],
-  template: `
-    <h1>{{title}}</h1>
-    <h2>My Dapps</h2>
-    <ul class="heroes">
-      <li *ngFor="let dapp of dapps"
-        [class.selected]="dapp === selectedDapp"
-        (click)="onSelect(dapp)">
-        <span class="badge">{{dapp.id}}</span> {{dapp.name}}
-      </li>
-    </ul>
-    <my-dapp-detail [dapp]="selectedDapp"></my-dapp-detail>
-  `
+    `],
+  providers: [DappService],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Dapps';
-  dapps = DAPPS;
+  dapps: Dapp[];
   selectedDapp: Dapp;
+
+  constructor(private dappService: DappService) { }
+
+  getDapps(): void {
+    this.dappService.getDapps().then(dapps => this.dapps = dapps);
+  }
 
   onSelect(dapp: Dapp): void {
     this.selectedDapp = dapp;
+  }
+
+  ngOnInit(): void {
+    this.getDapps();
   }
 }
