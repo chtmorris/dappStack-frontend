@@ -6,7 +6,8 @@ import { routing }       from './app.routing';
 import { AppComponent }         from './app.component';
 import { DappDetailComponent }  from './dapp-detail.component';
 import { DappsComponent }       from './dapps.component';
-import { DappService }         from './dapp.service';
+import { DappService }          from './dapp.service';
+import { DashboardComponent }   from './dashboard.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { DappService }         from './dapp.service';
   ],
   declarations: [
     AppComponent,
+    DashboardComponent,
     DappDetailComponent,
     DappsComponent
   ],
