@@ -11,13 +11,13 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
     path: 'dapps',
     component: DappsComponent
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
