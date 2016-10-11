@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { Dapp } from './dapp.service';
+import { Dapp } from './dapp';
 import { DappService } from './dapp.service';
 
 @Component({
