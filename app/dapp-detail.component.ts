@@ -6,19 +6,9 @@ import { Dapp } from './dapp';
 import { DappService } from './dapp.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-dapp-detail',
-  // templateUrl: 'dapp-detail.component.html',
-  template: `
-    <div *ngIf="dapp">
-      <h2>{{dapp.name}} details</h2>
-      <div><label>id: </label>{{dapp.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="dapp.name" placeholder="name">
-      </div>
-      <button (click)="goBack()">Back</button>
-    </div>
-  `
+  templateUrl: 'dapp-detail.component.html',
 })
 
 export class DappDetailComponent implements OnInit {
