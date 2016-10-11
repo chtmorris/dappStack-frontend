@@ -1,0 +1,14 @@
+<h2>My Dapps</h2>
+<ul class="heroes">
+  <li *ngFor="let dapp of dapps"
+    [class.selected]="dapp === selectedDapp"
+    (click)="onSelect(dapp)">
+    <span class="badge">{{dapp.id}}</span> {{dapp.name}}
+  </li>
+</ul>
+<div *ngIf="selectedDapp">
+  <h2>
+    {{selectedDapp.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
