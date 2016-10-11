@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DappsComponent }       from './dapps.component';
 import { DashboardComponent }   from './dashboard.component';
+import { DappDetailComponent }  from './dapp-detail.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
   {
     path: 'dapps',
     component: DappsComponent
+  },
+  {
+    path: 'detail/:id',
+    component: DappDetailComponent
   },
 ];
 
