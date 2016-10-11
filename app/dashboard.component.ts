@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
 
 import { Dapp }         from './dapp';
 import { DappService }  from './dapp.service';
@@ -22,12 +23,18 @@ export class DashboardComponent implements OnInit {
 
   dapps: Dapp[] = [];
 
-  constructor(private dappService: DappService) { }
+  constructor(
+    private router: Router,
+    private dappService: DappService
+  ) { }
 
   ngOnInit(): void {
     this.dappService.getDapps()
       .then(dapps => this.dapps = dapps.slice(1, 5));
   }
 
-  gotoDetail(dapp: Dapp): void { }
+  gotoDetail(dapp: Dapp): void {
+    let link = ['/detail', dapp.id];
+    this.router.navigate(link);
+  }
 }

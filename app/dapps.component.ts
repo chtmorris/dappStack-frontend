@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
 
 import { Dapp } from './dapp';
 import { DappService } from './dapp.service';
@@ -15,8 +16,15 @@ import { DappService } from './dapp.service';
         <span class="badge">{{dapp.id}}</span> {{dapp.name}}
       </li>
     </ul>
-    <my-dapp-detail [dapp]="selectedDapp"></my-dapp-detail>
+    <div *ngIf="selectedDapp">
+      <h2>
+        {{selectedDapp.name | uppercase}} is my hero
+      </h2>
+      <button (click)="gotoDetail()">View Details</button>
+    </div>
   `,
+  // templateUrl: 'dapps.component.html',
+  // styleUrls: [ 'dapps.component.css' ],
   styles: [`
     .selected {
       background-color: #CFD8DC !important;
@@ -74,7 +82,10 @@ export class DappsComponent implements OnInit{
   dapps: Dapp[];
   selectedDapp: Dapp;
 
-  constructor(private dappService: DappService) { }
+  constructor(
+    private router: Router,
+    private dappService: DappService
+  ) { }
 
   getDapps(): void {
     this.dappService.getDapps().then(dapps => this.dapps = dapps);
@@ -86,5 +97,9 @@ export class DappsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getDapps();
+  }
+
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedDapp.id]);
   }
 }
