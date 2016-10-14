@@ -7,7 +7,16 @@ import { DappService }  from './dapp.service';
 @Component({
   moduleId: module.id,
   selector: 'my-dashboard',
-  templateUrl: 'dashboard.component.html',
+  template: `
+    <h3>Top Dapps</h3>
+    <div class="grid grid-pad">
+      <div *ngFor="let dapp of dapps" (click)="gotoDetail(dapp)" class="col-1-4">
+        <div class="module hero">
+          <h4>{{dapp.name}}</h4>
+        </div>
+      </div>
+    </div>
+  `,
 })
 
 export class DashboardComponent implements OnInit {
